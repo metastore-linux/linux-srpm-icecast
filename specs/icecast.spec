@@ -10,47 +10,47 @@
 # Setup _pkgdocdir if not defined already.
 %{!?_pkgdocdir:%global _pkgdocdir   %{_docdir}/%{name}-%{version}}
 
-Name:               icecast
-Version:            2.4.3
-Release:            2%{?dist}
+Name:                   icecast
+Version:                2.4.3
+Release:                2%{?dist}
 
-Summary:            ShoutCast compatible streaming media server
-License:            GPLv2+
-URL:                http://www.%{name}.org/
+Summary:                ShoutCast compatible streaming media server
+License:                GPLv2+
+URL:                    http://www.%{name}.org/
 
-Source0:            http://downloads.xiph.org/releases/%{name}/%{name}-%{version}.tar.gz
-Source1:            %{name}.init
-Source2:            %{name}.logrotate
-Source3:            %{name}.service
-Source4:            %{name}.xml
-Source5:            status3.xsl
+Source0:                http://downloads.xiph.org/releases/%{name}/%{name}-%{version}.tar.gz
+Source1:                %{name}.init
+Source2:                %{name}.logrotate
+Source3:                %{name}.service
+Source4:                %{name}.xml
+Source5:                status3.xsl
 
-BuildRequires:      automake
-BuildRequires:      curl-devel >= 7.10.0
-BuildRequires:      libogg-devel >= 1.0
-BuildRequires:      libtheora-devel >= 1.0
-BuildRequires:      libvorbis-devel >= 1.0
-BuildRequires:      libxml2-devel
-BuildRequires:      libxslt-devel
-BuildRequires:      openssl-devel
-BuildRequires:      speex-devel
+BuildRequires:          automake
+BuildRequires:          curl-devel >= 7.10.0
+BuildRequires:          libogg-devel >= 1.0
+BuildRequires:          libtheora-devel >= 1.0
+BuildRequires:          libvorbis-devel >= 1.0
+BuildRequires:          libxml2-devel
+BuildRequires:          libxslt-devel
+BuildRequires:          openssl-devel
+BuildRequires:          speex-devel
 
-Requires:           mailcap
+Requires:               mailcap
 
-Requires(pre):	    shadow-utils
+Requires(pre):          shadow-utils
 
 %if 0%{?with_systemd}
-BuildRequires:      systemd
+BuildRequires:          systemd
 
 %{?systemd_requires}
 %else # 0%{?with_systemd}
-Requires(post):     /sbin/chkconfig
-Requires(preun):    /sbin/chkconfig
-Requires(preun):    /sbin/service
-Requires(postun):   /sbin/service
+Requires(post):         /sbin/chkconfig
+Requires(preun):        /sbin/chkconfig
+Requires(preun):        /sbin/service
+Requires(postun):       /sbin/service
 %endif # 0%{?with_systemd}
 
-Provides:           streaming-server
+Provides:               streaming-server
 
 %description
 Icecast is a streaming media server which currently supports
@@ -65,8 +65,8 @@ communication and interaction.
 # -------------------------------------------------------------------------------------------------------------------- #
 
 %package doc
-Summary:        Documentation files for %{name}
-BuildArch:	    noarch
+Summary:                Documentation files for %{name}
+BuildArch:              noarch
 
 %description doc
 This package contains the documentation files for %{name}.
@@ -104,7 +104,7 @@ This package contains the documentation files for %{name}.
 %{__install} -Dpm 0644 %{SOURCE2} %{buildroot}%{_sysconfdir}/logrotate.d/%{name}
 %{__install} -Dpm 0640 %{SOURCE4} %{buildroot}%{_sysconfdir}/%{name}.xml
 %{__install} -Dpm 0644 %{SOURCE5} %{buildroot}%{_datadir}/%{name}/web/status3.xsl
-%{__mkdir} -p %{buildroot}%{_localstatedir}/log/%{name}	\
+%{__mkdir} -p %{buildroot}%{_localstatedir}/log/%{name} \
     %{buildroot}%{_localstatedir}/run/%{name} \
     %{buildroot}%{_pkgdocdir}/{conf,examples}
 %{__cp} -a html/ AUTHORS ChangeLog COPYING NEWS TODO %{buildroot}%{_pkgdocdir}
